@@ -36,3 +36,11 @@ def test_string_to_number():
     """Тест для статического метода получения числа из строки"""
     assert Item.string_to_number('10') == 10
     assert Item.string_to_number('10.1') == 10
+
+
+def test_name():
+    """Тест для декоратора и сеттера, с проверкой длины наименования"""
+    item = Item("Мышка", 50, 5)
+    assert item.name == "Мышка"
+    item.name = "Суперпупермышка"
+    assert item.name == "Мышка"
