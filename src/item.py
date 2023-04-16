@@ -21,6 +21,9 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+    def __repr__(self):
+        return f'{self.__name} {self.price} {self.quantity}'
+
     @property
     def name(self):
         """Геттер для name - возвращает название товара"""
@@ -48,11 +51,15 @@ class Item:
         self.price = self.price * self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, file="../src/items.csv"):
+    def instantiate_from_csv(cls, file="../src/items.csv") -> None:
         """Класс-метод, инициализирующий экземпляры класса данными из файла"""
 
         with open(file, encoding="cp1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                cls.all.append(cls(row['name'], float(row['price']), int(row['quantity'])))
+                cls.all.append((row['name'], float(row['price']), int(row['quantity'])))
 
+    @staticmethod
+    def string_to_number(string):
+        """Статический метод, возвращающий число из числа-строки"""
+        return int(float(string)) if "." in string else int(string)
