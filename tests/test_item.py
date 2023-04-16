@@ -31,6 +31,7 @@ def test_instantiate_from_csv():
     assert item1.price == 1000
     assert item1.quantity == 3
 
+
 def test_string_to_number():
     """Тест для статического метода получения числа из строки"""
     assert Item.string_to_number('10') == 10
