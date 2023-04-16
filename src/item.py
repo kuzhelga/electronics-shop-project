@@ -1,3 +1,6 @@
+import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -18,12 +21,10 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
-
     @property
     def name(self):
         """Геттер для name - возвращает название товара"""
         return self.__name
-
 
     @name.setter
     def name(self, name):
@@ -31,7 +32,6 @@ class Item:
             print("Длина наименования товара больше 10 символов")
         else:
             self.__name = name
-
 
     def calculate_total_price(self) -> float:
         """
@@ -46,3 +46,13 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
+
+    @classmethod
+    def instantiate_from_csv(cls, file="../src/items.csv"):
+        """Класс-метод, инициализирующий экземпляры класса данными из файла"""
+
+        with open(file, encoding="cp1251") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                cls.all.append(cls(row['name'], float(row['price']), int(row['quantity'])))
+
