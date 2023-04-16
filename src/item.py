@@ -53,11 +53,11 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, file="../src/items.csv") -> None:
         """Класс-метод, инициализирующий экземпляры класса данными из файла"""
-
+        cls.all = []
         with open(file, encoding="cp1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                cls.all.append((row['name'], float(row['price']), int(row['quantity'])))
+                cls(row['name'], float(row['price']), int(row['quantity']))
 
     @staticmethod
     def string_to_number(string):
