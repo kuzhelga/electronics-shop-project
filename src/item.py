@@ -22,7 +22,7 @@ class Item:
         Item.all.append(self)
 
     def __repr__(self):
-        return f'{self.__name} {self.price} {self.quantity}'
+        return f'Class {self.__class__.__name__}: {self.__name}, price {self.price}, quantity {self.quantity}'
 
     @property
     def name(self):
