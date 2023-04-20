@@ -44,3 +44,11 @@ def test_name():
     assert item.name == "Мышка"
     item.name = "Суперпупермышка"
     assert item.name == "Мышка"
+
+def test__repr__(data):
+    """Тест для метода repr"""
+    assert repr(data) == "Item('Laptop', 50000, 2)"
+
+def test__str__(data):
+    """Тест для метода str"""
+    assert str(data) == 'Laptop'
