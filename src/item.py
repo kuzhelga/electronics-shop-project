@@ -23,11 +23,11 @@ class Item:
 
     def __repr__(self):
         """Метод вывода для разработчиков"""
-        return f"Class {self.__class__.__name__}: {self.__name}, price {self.price}, quantity {self.quantity}"
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
         """Метод вывода для пользователей"""
-        return f"{self.__name}, цена {self.price}"
+        return f'{self.__name}'
 
     @property
     def name(self):
