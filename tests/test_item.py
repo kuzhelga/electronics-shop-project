@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -45,10 +46,18 @@ def test_name():
     item.name = "Суперпупермышка"
     assert item.name == "Мышка"
 
+
 def test__repr__(data):
     """Тест для метода repr"""
     assert repr(data) == "Item('Laptop', 50000, 2)"
 
+
 def test__str__(data):
     """Тест для метода str"""
     assert str(data) == 'Laptop'
+
+
+def test__add__():
+    """Тест для метода add"""
+    assert Item("Laptop", 50000, 2) + Phone("iPhone", 33000, 10, 2) == 12
+    assert Item("Laptop", 50000, 2) + Item("Mouse", 3000, 100) == 102
