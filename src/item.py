@@ -68,3 +68,10 @@ class Item:
     def string_to_number(string):
         """Статический метод, возвращающий число из числа-строки"""
         return int(float(string)) if "." in string else int(string)
+
+    def __add__(self, other):
+        """Метод для сложения экземпляров класса Item и подклассов"""
+        if not isinstance(self, Item) and not isinstance(other, Item):
+            raise Exception("Складывать можно только объекты класса Item и Phone!")
+
+        return self.quantity + other.quantity
