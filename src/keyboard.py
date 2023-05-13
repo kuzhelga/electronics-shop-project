@@ -13,11 +13,6 @@ class MixinLog:
         """Сеттер для раскладки языка"""
         return self.__language
 
-    @language.setter
-    def language(self, value):
-        """Сеттер для языка - выводит предупреждение при выборе неподходящего языка"""
-        raise AttributeError("property 'language' of 'KeyBoard' object has no setter")
-
     def change_lang(self):
         """Метод для смены раскладки клавиатуры"""
         if self.__language == "EN":
