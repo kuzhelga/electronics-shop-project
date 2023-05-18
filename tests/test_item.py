@@ -1,7 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -25,7 +25,8 @@ def test_apply_discount(data):
 
 def test_instantiate_from_csv():
     """Тест для класс-метода, проверяет все ли товары загружены и совпадение с конкретным товаром"""
-    Item.instantiate_from_csv()
+    # файл загрузки переименован на items1, чтобы тест не упал
+    Item.instantiate_from_csv("../src/items1.csv")
     assert len(Item.all) == 5
     item1 = Item.all[1]
     assert item1.name == "Ноутбук"
@@ -61,3 +62,10 @@ def test__add__():
     """Тест для метода add"""
     assert Item("Laptop", 50000, 2) + Phone("iPhone", 33000, 10, 2) == 12
     assert Item("Laptop", 50000, 2) + Item("Mouse", 3000, 100) == 102
+
+
+def test_instantiate_from_csv():
+    """Тест для класс-метода проверяет, что при выборе битого файла выбрасывается исключение"""
+    # файл загрузки выбран битый items.csv
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv("../src/items.csv")
