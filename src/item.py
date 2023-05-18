@@ -59,10 +59,15 @@ class Item:
     def instantiate_from_csv(cls, file="../src/items.csv") -> None:
         """Класс-метод, инициализирующий экземпляры класса данными из файла"""
         cls.all = []
-        with open(file, encoding="cp1251") as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row['name'], float(row['price']), int(row['quantity']))
+        try:
+            with open(file, encoding="cp1251") as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if len(row) != 3:
+                        raise InstantiateCSVError
+                    cls(row['name'], float(row['price']), int(row['quantity']))
+        except FileNotFoundError:
+            print('Отсутствует файл items.csv')
 
     @staticmethod
     def string_to_number(string):
@@ -75,3 +80,10 @@ class Item:
             raise Exception("Складывать можно только объекты класса Item и Phone!")
 
         return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    """Класс-исключение для проверки целостности csv файла"""
+    def __init__(self):
+        self.message = "Файл item.csv поврежден"
+        print(self.message)
