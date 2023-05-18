@@ -78,3 +78,8 @@ class Item:
             raise Exception("Складывать можно только объекты класса Item и Phone!")
 
         return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    """Класс-исключение для проверки наличия и целостности csv файла"""
+
