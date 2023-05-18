@@ -63,6 +63,8 @@ class Item:
             with open(file, encoding="cp1251") as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
+                    if len(row) != 3:
+                        raise InstantiateCSVError
                     cls(row['name'], float(row['price']), int(row['quantity']))
         except FileNotFoundError:
             print('Отсутствует файл items.csv')
@@ -81,5 +83,7 @@ class Item:
 
 
 class InstantiateCSVError(Exception):
-    """Класс-исключение для проверки наличия и целостности csv файла"""
-
+    """Класс-исключение для проверки целостности csv файла"""
+    def __init__(self):
+        self.message = "Файл item.csv поврежден"
+        print(self.message)
